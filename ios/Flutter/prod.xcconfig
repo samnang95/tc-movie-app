@@ -1,0 +1,3 @@
+#include "Generated.xcconfig"
+PRODUCT_BUNDLE_IDENTIFIER=com.example.myApp
+FLUTTER_FLAVOR=prod

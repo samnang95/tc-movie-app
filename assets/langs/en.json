@@ -1,0 +1,32 @@
+{
+  "app_name": "TC-Movie",
+  "ok": "OK",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "edit": "Edit",
+  "search": "Search",
+  "loading": "Loading...",
+  "error": "Error",
+  "retry": "Retry",
+  "no_data": "No data found",
+
+  "login": "Login",
+  "logout": "Logout",
+  "email": "Email",
+  "password": "Password",
+  "forgot_password": "Forgot Password?",
+  "login_success": "Login successful",
+  "login_failed": "Login failed",
+  "logout_confirm": "Are you sure you want to logout?",
+
+  "home": "Home",
+  "users": "Users",
+  "no_users": "No users found",
+
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "dark_mode": "Dark Mode",
+  "about": "About"
+}
