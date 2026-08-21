@@ -20,14 +20,10 @@ abstract class EnvConfig {
   static String get envFileName => '.env.${_environment.name}';
 
   // ── Getters ────────────────────────────────────────────────────────
-
-  static String get baseUrl =>
-      dotenv.env['BASE_URL'] ?? 'https://jsonplaceholder.typicode.com';
-
+  static String get baseUrl => dotenv.env['BASE_URL'] ?? 'https://jsonplaceholder.typicode.com';
   static String get appName => dotenv.env['APP_NAME'] ?? 'TC-Movie';
 
   // ── Convenience ────────────────────────────────────────────────────
-
   static bool get isDev => _environment == Environment.dev;
   static bool get isStage => _environment == Environment.stage;
   static bool get isProd => _environment == Environment.prod;

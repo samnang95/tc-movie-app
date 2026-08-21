@@ -2,24 +2,24 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 
-import '../services/auth_service.dart';
+import '../storage/secure_storage.dart';
+import '../../domain/auth/refresh_token/usecases/refresh_token.dart';
 
-/// Interceptor that:
-/// 1. Attaches Bearer token to every request
-/// 2. Handles 401 responses by refreshing the token and retrying
-/// 3. Logs requests/responses/errors in debug mode
 class ApiInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     // Attach auth token if available
     try {
-      final authService = GetIt.instance<AuthService>();
-      final token = authService.getAccessToken();
+      final secureStorage = GetIt.instance<SecureStorage>();
+      final token = await secureStorage.getAccessToken();
       if (token != null) {
         options.headers['Authorization'] = 'Bearer $token';
       }
     } catch (_) {
-      // AuthService not yet registered — skip
+      // SecureStorage not yet registered — skip
     }
 
     if (kDebugMode) {
@@ -68,13 +68,14 @@ class ApiInterceptor extends Interceptor {
     // Handle 401 — attempt token refresh and retry
     if (err.response?.statusCode == 401) {
       try {
-        final authService = GetIt.instance<AuthService>();
-        final refreshed = await authService.refreshToken();
+        final refreshToken = GetIt.instance<RefreshToken>();
+        final (failure, _) = await refreshToken();
 
-        if (refreshed) {
+        if (failure == null) {
           // Retry the original request with the new token
           final options = err.requestOptions;
-          final newToken = authService.getAccessToken();
+          final secureStorage = GetIt.instance<SecureStorage>();
+          final newToken = await secureStorage.getAccessToken();
           options.headers['Authorization'] = 'Bearer $newToken';
 
           final dio = Dio();
