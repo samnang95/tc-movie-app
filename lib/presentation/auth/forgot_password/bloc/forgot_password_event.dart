@@ -1,0 +1,12 @@
+abstract class ForgotPasswordEvent {
+  const ForgotPasswordEvent();
+}
+
+class ForgotPasswordEmailChanged extends ForgotPasswordEvent {
+  final String email;
+  const ForgotPasswordEmailChanged(this.email);
+}
+
+class ForgotPasswordSubmitted extends ForgotPasswordEvent {
+  const ForgotPasswordSubmitted();
+}

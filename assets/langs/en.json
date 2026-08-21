@@ -25,5 +25,10 @@
   "privacy_policy": "Privacy Policy",
   "of_app": " of Midnight Cinema.",
   "already_have_account": "Already have an account? ",
-  "premium_access": "PREMIUM ACCESS"
+  "premium_access": "PREMIUM ACCESS",
+  "forgot_password_title": "Forgot Password",
+  "forgot_password_subtitle": "Enter your email to receive a password reset link",
+  "forgot_email_hint": "name@cinema.com",
+  "send_link": "Send Link ▷",
+  "return_to_login": "Return to Login"
 }
