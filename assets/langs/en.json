@@ -30,5 +30,12 @@
   "forgot_password_subtitle": "Enter your email to receive a password reset link",
   "forgot_email_hint": "name@cinema.com",
   "send_link": "Send Link ▷",
-  "return_to_login": "Return to Login"
+  "return_to_login": "Return to Login",
+  "continue_watching": "Continue Watching",
+  "trending_now": "Trending Now",
+  "new_releases": "New Releases",
+  "view_all": "View All",
+  "play": "Play",
+  "my_list": "My List",
+  "original_series": "ORIGINAL SERIES"
 }

@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
-import '../../auth/sign_out/bloc/sign_out_event.dart';
 import '../../auth/sign_out/bloc/sign_out_state.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
+import '../../shared/widgets/x_scaffold.dart';
+import '../../../core/constants/app_colors.dart';
+
+import '../widgets/home_top_bar.dart';
+import '../widgets/home_hero_banner.dart';
+import '../widgets/home_section_header.dart';
+import '../widgets/home_continue_watching.dart';
+import '../widgets/home_trending_now.dart';
+import '../widgets/home_new_releases.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,89 +29,62 @@ class HomePage extends StatelessWidget {
           context.go('/sign-in');
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () => context
-                  .read<HomeBloc>()
-                  .add(const HomeDataRequested()),
-            ),
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () => context
-                  .read<SignOutBloc>()
-                  .add(const SignOutRequested()),
-            ),
-          ],
-        ),
+      child: XScaffold(
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            // Loading state
             if (state.status == HomeStatus.loading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            // Failure state
-            if (state.status == HomeStatus.failure) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        size: 48,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        state.errorMessage,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: 16),
-                      FilledButton.icon(
-                        onPressed: () => context
-                            .read<HomeBloc>()
-                            .add(const HomeDataRequested()),
-                        icon: const Icon(Icons.refresh),
-                        label: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
               );
             }
 
-            // Empty state
-            if (state.items.isEmpty) {
-              return const Center(child: Text('No data found'));
-            }
-
-            // Loaded state
             return RefreshIndicator(
-              onRefresh: () async => context
-                  .read<HomeBloc>()
-                  .add(const HomeDataRequested()),
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: state.items.length,
-                separatorBuilder: (_, _) => const Divider(height: 1),
-                itemBuilder: (context, index) {
-                  final item = state.items[index];
-                  return ListTile(
-                    leading: CircleAvatar(
-                      child: Text(item.name[0].toUpperCase()),
+              color: AppColors.primary,
+              backgroundColor: AppColors.surface,
+              onRefresh: () async =>
+                  context.read<HomeBloc>().add(const HomeDataRequested()),
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // ── Top bar ──
+                    const HomeTopBar(),
+
+                    // ── Hero Banner ──
+                    const HomeHeroBanner(),
+
+                    const SizedBox(height: 28),
+
+                    // ── Continue Watching ──
+                    HomeSectionHeader(
+                      title: 'continue_watching'.getString(context),
                     ),
-                    title: Text(item.name),
-                    subtitle: Text(item.email),
-                    trailing: const Icon(Icons.chevron_right),
-                  );
-                },
+                    const SizedBox(height: 14),
+                    const HomeContinueWatching(),
+
+                    const SizedBox(height: 28),
+
+                    // ── Trending Now ──
+                    HomeSectionHeader(
+                      title: 'trending_now'.getString(context),
+                      showViewAll: true,
+                    ),
+                    const SizedBox(height: 14),
+                    const HomeTrendingNow(),
+
+                    const SizedBox(height: 28),
+
+                    // ── New Releases ──
+                    HomeSectionHeader(
+                      title: 'new_releases'.getString(context),
+                    ),
+                    const SizedBox(height: 14),
+                    const HomeNewReleases(),
+
+                    const SizedBox(height: 32),
+                  ],
+                ),
               ),
             );
           },
