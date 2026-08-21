@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../constants/app_constants.dart';
-import 'api_exceptions.dart';
+import '../error/exceptions.dart';
 import 'api_interceptor.dart';
 
 class ApiClient {
@@ -100,7 +100,7 @@ class ApiClient {
     }
   }
 
-  ApiException _mapDioException(DioException error) {
+  AppException _mapDioException(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
@@ -134,10 +134,10 @@ class ApiClient {
         };
 
       case DioExceptionType.cancel:
-        return const ApiException(message: 'Request cancelled');
+        return const AppException(message: 'Request cancelled');
 
       default:
-        return ApiException(
+        return AppException(
           message: error.message ?? 'Unexpected error occurred',
         );
     }

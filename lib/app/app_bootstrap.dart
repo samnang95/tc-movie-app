@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 import '../core/config/env_config.dart';
-import '../core/di/service_locator.dart';
+import '../core/di/injection.dart';
 import '../core/localization/app_locale.dart';
 
 /// Shared bootstrap logic for all entry points.
@@ -12,7 +12,7 @@ Future<void> initApp(Environment env) async {
   await EnvConfig.init(env);
 
   // Initialize dependency injection (get_it)
-  await setupServiceLocator();
+  await setupInjection();
 
   // Load translations from JSON
   await loadLocales();
