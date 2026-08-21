@@ -12,5 +12,18 @@
   "apple": "Apple",
   "new_to_app": "New to Midnight Cinema? ",
   "create_account": "Create an\nAccount",
-  "rights_reserved": "© 2024 MIDNIGHT CINEMA PRODUCTIONS. ALL\nRIGHTS RESERVED."
+  "rights_reserved": "© 2024 MIDNIGHT CINEMA PRODUCTIONS. ALL\nRIGHTS RESERVED.",
+  "join_the_cinema": "Join the Cinema",
+  "create_account_subtitle": "Create your account to unlock cinematic experiences and exclusive premieres.",
+  "full_name": "Full Name",
+  "full_name_hint": "Enter your full name",
+  "sign_up_email_hint": "you@example.com",
+  "sign_up": "Sign Up",
+  "agree_to": "I agree to the ",
+  "terms_of_service": "Terms of Service",
+  "and": " and ",
+  "privacy_policy": "Privacy Policy",
+  "of_app": " of Midnight Cinema.",
+  "already_have_account": "Already have an account? ",
+  "premium_access": "PREMIUM ACCESS"
 }

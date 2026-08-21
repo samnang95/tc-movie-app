@@ -8,12 +8,15 @@ import '../di/injection.dart';
 import '../../domain/auth/current_user/usecases/get_current_user.dart';
 import '../../domain/auth/sign_in/usecases/sign_in.dart';
 import '../../domain/auth/sign_out/usecases/sign_out.dart';
+import '../../domain/auth/sign_up/usecases/sign_up.dart';
 import '../../domain/home/homepage/usecases/get_home_data.dart';
 
 // ── Presentation ────────────────────────────────────────────────────────
 import '../../presentation/auth/sign_in/bloc/sign_in_bloc.dart';
 import '../../presentation/auth/sign_in/pages/sign_in_page.dart';
 import '../../presentation/auth/sign_out/bloc/sign_out_bloc.dart';
+import '../../presentation/auth/sign_up/bloc/sign_up_bloc.dart';
+import '../../presentation/auth/sign_up/pages/sign_up_page.dart';
 import '../../presentation/home/bloc/home_bloc.dart';
 import '../../presentation/home/pages/home_page.dart';
 
@@ -23,9 +26,10 @@ final GoRouter appRouter = GoRouter(
     final currentUser = await getIt<GetCurrentUser>()();
     final isLoggedIn = currentUser.isAuthenticated;
     final isOnSignIn = state.matchedLocation == '/sign-in';
+    final isOnSignUp = state.matchedLocation == '/sign-up';
 
-    if (!isLoggedIn && !isOnSignIn) return '/sign-in';
-    if (isLoggedIn && isOnSignIn) return '/home';
+    if (!isLoggedIn && !isOnSignIn && !isOnSignUp) return '/sign-in';
+    if (isLoggedIn && (isOnSignIn || isOnSignUp)) return '/home';
     return null;
   },
   routes: [
@@ -34,6 +38,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => BlocProvider(
         create: (_) => SignInBloc(signIn: getIt<SignIn>()),
         child: const SignInPage(),
+      ),
+    ),
+    GoRoute(
+      path: '/sign-up',
+      builder: (context, state) => BlocProvider(
+        create: (_) => SignUpBloc(signUp: getIt<SignUp>()),
+        child: const SignUpPage(),
       ),
     ),
     GoRoute(
