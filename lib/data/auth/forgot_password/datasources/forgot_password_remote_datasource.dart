@@ -3,6 +3,7 @@ import '../models/forgot_password_request_model.dart';
 import '../models/forgot_password_response_model.dart';
 
 class ForgotPasswordRemoteDataSource {
+  // ignore: unused_field
   final ApiClient _apiClient;
 
   ForgotPasswordRemoteDataSource(this._apiClient);
@@ -10,12 +11,10 @@ class ForgotPasswordRemoteDataSource {
   Future<ForgotPasswordResponseModel> forgotPassword(
     ForgotPasswordRequestModel request,
   ) async {
-    final response = await _apiClient.post(
-      '/auth/forgot-password',
-      data: request.toJson(),
-    );
-    return ForgotPasswordResponseModel.fromJson(
-      response.data as Map<String, dynamic>,
+    // Mocking the API response
+    await Future.delayed(const Duration(seconds: 1));
+    return const ForgotPasswordResponseModel(
+      message: 'Reset link sent successfully',
     );
   }
 }

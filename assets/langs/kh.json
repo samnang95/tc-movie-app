@@ -30,5 +30,12 @@
   "forgot_password_subtitle": "បញ្ចូលអ៊ីមែលរបស់អ្នកដើម្បីទទួលបានតំណកំណត់ពាក្យសម្ងាត់ឡើងវិញ",
   "forgot_email_hint": "ឈ្មោះ@cinema.com",
   "send_link": "ផ្ញើតំណ ▷",
-  "return_to_login": "ត្រឡប់ទៅចូលប្រើ"
+  "return_to_login": "ត្រឡប់ទៅចូលប្រើ",
+  "continue_watching": "មើលបន្ត",
+  "trending_now": "កំពុងពេញនិយម",
+  "new_releases": "ចេញថ្មី",
+  "view_all": "មើលទាំងអស់",
+  "play": "ចាក់",
+  "my_list": "បញ្ជីរបស់ខ្ញុំ",
+  "original_series": "រឿងភាគដើម"
 }
