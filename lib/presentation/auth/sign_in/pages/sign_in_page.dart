@@ -204,8 +204,7 @@ class SignInPage extends StatelessWidget {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          // todo: Navigate to sign-up page
-                          debugPrint("Create Account");
+                          context.push('/sign-up');
                         },
                         child: RichText(
                           text: TextSpan(

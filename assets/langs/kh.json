@@ -12,5 +12,18 @@
   "apple": "Apple",
   "new_to_app": "ទើបតែស្គាល់ Midnight Cinema មែនទេ? ",
   "create_account": "បង្កើត\nគណនី",
-  "rights_reserved": "© 2024 MIDNIGHT CINEMA PRODUCTIONS. រក្សាសិទ្ធិ\nគ្រប់យ៉ាង។"
+  "rights_reserved": "© 2024 MIDNIGHT CINEMA PRODUCTIONS. រក្សាសិទ្ធិ\nគ្រប់យ៉ាង។",
+  "join_the_cinema": "ចូលរួមនៅ Cinema",
+  "create_account_subtitle": "បង្កើតគណនីរបស់អ្នកដើម្បីទទួលបានបទពិសោធន៍ភាពយន្ត និងការសម្ពោធពិសេស។",
+  "full_name": "ឈ្មោះពេញ",
+  "full_name_hint": "បញ្ចូលឈ្មោះពេញរបស់អ្នក",
+  "sign_up_email_hint": "អ្នក@ឧទាហរណ៍.com",
+  "sign_up": "ចុះឈ្មោះ",
+  "agree_to": "ខ្ញុំយល់ព្រមនឹង ",
+  "terms_of_service": "លក្ខខណ្ឌនៃសេវាកម្ម",
+  "and": " និង ",
+  "privacy_policy": "គោលការណ៍ឯកជនភាព",
+  "of_app": " របស់ Midnight Cinema។",
+  "already_have_account": "មានគណនីរួចហើយមែនទេ? ",
+  "premium_access": "ចូលប្រើពិសេស"
 }

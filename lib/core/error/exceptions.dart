@@ -48,3 +48,8 @@ class BadRequestException extends AppException {
 class CacheException extends AppException {
   const CacheException({super.message = 'Cache error'});
 }
+
+class ConflictException extends AppException {
+  const ConflictException({super.message = 'Resource already exists'})
+      : super(statusCode: 409);
+}
