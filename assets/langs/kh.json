@@ -25,5 +25,10 @@
   "privacy_policy": "គោលការណ៍ឯកជនភាព",
   "of_app": " របស់ Midnight Cinema។",
   "already_have_account": "មានគណនីរួចហើយមែនទេ? ",
-  "premium_access": "ចូលប្រើពិសេស"
+  "premium_access": "ចូលប្រើពិសេស",
+  "forgot_password_title": "ភ្លេចពាក្យសម្ងាត់",
+  "forgot_password_subtitle": "បញ្ចូលអ៊ីមែលរបស់អ្នកដើម្បីទទួលបានតំណកំណត់ពាក្យសម្ងាត់ឡើងវិញ",
+  "forgot_email_hint": "ឈ្មោះ@cinema.com",
+  "send_link": "ផ្ញើតំណ ▷",
+  "return_to_login": "ត្រឡប់ទៅចូលប្រើ"
 }

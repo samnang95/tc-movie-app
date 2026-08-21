@@ -114,7 +114,7 @@ class SignInPage extends StatelessWidget {
                         XText.label('password'.getString(context)),
                         GestureDetector(
                           onTap: () {
-                            // todo: Navigate to forgot password
+                            context.push('/forgot-password');
                           },
                           child: XText(
                             'forgot_password'.getString(context),

@@ -15,6 +15,8 @@ import '../../data/auth/sign_out/datasources/sign_out_local_datasource.dart';
 import '../../data/auth/sign_out/repositories/sign_out_repository_impl.dart';
 import '../../data/auth/sign_up/datasources/sign_up_remote_datasource.dart';
 import '../../data/auth/sign_up/repositories/sign_up_repository_impl.dart';
+import '../../data/auth/forgot_password/datasources/forgot_password_remote_datasource.dart';
+import '../../data/auth/forgot_password/repositories/forgot_password_repository_impl.dart';
 
 // ── Data: Home ──────────────────────────────────────────────────────────
 import '../../data/home/datasources/home_remote_datasource.dart';
@@ -31,6 +33,8 @@ import '../../domain/auth/sign_out/repositories/sign_out_repository.dart';
 import '../../domain/auth/sign_out/usecases/sign_out.dart';
 import '../../domain/auth/sign_up/repositories/sign_up_repository.dart';
 import '../../domain/auth/sign_up/usecases/sign_up.dart';
+import '../../domain/auth/forgot_password/repositories/forgot_password_repository.dart';
+import '../../domain/auth/forgot_password/usecases/forgot_password.dart';
 
 // ── Domain: Home ────────────────────────────────────────────────────────
 import '../../domain/home/homepage/repositories/home_repository.dart';
@@ -61,6 +65,7 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton<RefreshTokenRemoteDataSource>(() => RefreshTokenRemoteDataSource(getIt<SecureStorage>()));
   getIt.registerLazySingleton<HomeRemoteDataSource>(() => HomeRemoteDataSource(getIt<ApiClient>()));
   getIt.registerLazySingleton<SignUpRemoteDataSource>(() => SignUpRemoteDataSource(getIt<ApiClient>()));
+  getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(() => ForgotPasswordRemoteDataSource(getIt<ApiClient>()));
 
   // ── Repositories ──────────────────────────────────────────────────────
   getIt.registerLazySingleton<SignInRepository>(() => SignInRepositoryImpl(getIt<SignInRemoteDataSource>(), getIt<SecureStorage>()));
@@ -69,6 +74,7 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton<RefreshTokenRepository>(() => RefreshTokenRepositoryImpl(getIt<RefreshTokenRemoteDataSource>()));
   getIt.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(getIt<HomeRemoteDataSource>()));
   getIt.registerLazySingleton<SignUpRepository>(() => SignUpRepositoryImpl(getIt<SignUpRemoteDataSource>(), getIt<SecureStorage>()));
+  getIt.registerLazySingleton<ForgotPasswordRepository>(() => ForgotPasswordRepositoryImpl(getIt<ForgotPasswordRemoteDataSource>()));
 
   // ── Use Cases ─────────────────────────────────────────────────────────
   getIt.registerLazySingleton(() => SignIn(getIt<SignInRepository>()));
@@ -77,4 +83,5 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton(() => RefreshToken(getIt<RefreshTokenRepository>()));
   getIt.registerLazySingleton(() => GetHomeData(getIt<HomeRepository>()));
   getIt.registerLazySingleton(() => SignUp(getIt<SignUpRepository>()));
+  getIt.registerLazySingleton(() => ForgotPassword(getIt<ForgotPasswordRepository>()));
 }
