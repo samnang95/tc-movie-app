@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../auth/sign_out/bloc/sign_out_bloc.dart';
-import '../../auth/sign_out/bloc/sign_out_state.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
@@ -23,72 +20,65 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignOutBloc, SignOutState>(
-      listener: (context, state) {
-        if (state.status == SignOutStatus.success) {
-          context.go('/sign-in');
-        }
-      },
-      child: XScaffold(
-        body: BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) {
-            if (state.status == HomeStatus.loading) {
-              return const Center(
-                child: CircularProgressIndicator(color: AppColors.primary),
-              );
-            }
-
-            return RefreshIndicator(
-              color: AppColors.primary,
-              backgroundColor: AppColors.surface,
-              onRefresh: () async =>
-                  context.read<HomeBloc>().add(const HomeDataRequested()),
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ── Top bar ──
-                    const HomeTopBar(),
-
-                    // ── Hero Banner ──
-                    const HomeHeroBanner(),
-
-                    const SizedBox(height: 28),
-
-                    // ── Continue Watching ──
-                    HomeSectionHeader(
-                      title: 'continue_watching'.getString(context),
-                    ),
-                    const SizedBox(height: 14),
-                    const HomeContinueWatching(),
-
-                    const SizedBox(height: 28),
-
-                    // ── Trending Now ──
-                    HomeSectionHeader(
-                      title: 'trending_now'.getString(context),
-                      showViewAll: true,
-                    ),
-                    const SizedBox(height: 14),
-                    const HomeTrendingNow(),
-
-                    const SizedBox(height: 28),
-
-                    // ── New Releases ──
-                    HomeSectionHeader(
-                      title: 'new_releases'.getString(context),
-                    ),
-                    const SizedBox(height: 14),
-                    const HomeNewReleases(),
-
-                    const SizedBox(height: 32),
-                  ],
-                ),
-              ),
+    return XScaffold(
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state.status == HomeStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
             );
-          },
-        ),
+          }
+
+          return RefreshIndicator(
+            color: AppColors.primary,
+            backgroundColor: AppColors.surface,
+            onRefresh: () async =>
+                context.read<HomeBloc>().add(const HomeDataRequested()),
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ── Top bar ──
+                  const HomeTopBar(),
+
+                  // ── Hero Banner ──
+                  const HomeHeroBanner(),
+
+                  const SizedBox(height: 28),
+
+                  // ── Continue Watching ──
+                  HomeSectionHeader(
+                    title: 'continue_watching'.getString(context),
+                  ),
+                  const SizedBox(height: 14),
+                  const HomeContinueWatching(),
+
+                  const SizedBox(height: 28),
+
+                  // ── Trending Now ──
+                  HomeSectionHeader(
+                    title: 'trending_now'.getString(context),
+                    showViewAll: true,
+                  ),
+                  const SizedBox(height: 14),
+                  const HomeTrendingNow(),
+
+                  const SizedBox(height: 28),
+
+                  // ── New Releases ──
+                  HomeSectionHeader(
+                    title: 'new_releases'.getString(context),
+                  ),
+                  const SizedBox(height: 14),
+                  const HomeNewReleases(),
+
+                  const SizedBox(height: 32),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
