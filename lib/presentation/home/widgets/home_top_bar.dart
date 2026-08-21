@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../core/constants/app_colors.dart';
-import '../../auth/sign_out/bloc/sign_out_bloc.dart';
-import '../../auth/sign_out/bloc/sign_out_event.dart';
 import '../../shared/widgets/x_text.dart';
 
 class HomeTopBar extends StatelessWidget {
@@ -36,7 +33,9 @@ class HomeTopBar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => context.read<SignOutBloc>().add(const SignOutRequested()),
+            onTap: () {
+              // Now handled in Profile tab
+            },
             child: Container(
               width: 32,
               height: 32,

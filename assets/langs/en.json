@@ -37,5 +37,9 @@
   "view_all": "View All",
   "play": "Play",
   "my_list": "My List",
-  "original_series": "ORIGINAL SERIES"
+  "original_series": "ORIGINAL SERIES",
+  "nav_home": "Home",
+  "nav_search": "Search",
+  "nav_profile": "Profile",
+  "sign_out": "Sign Out"
 }
