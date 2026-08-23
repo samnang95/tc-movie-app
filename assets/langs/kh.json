@@ -41,5 +41,13 @@
   "nav_home": "ទំព័រដើម",
   "nav_search": "ស្វែងរក",
   "nav_profile": "គណនី",
-  "sign_out": "ចាកចេញ"
+  "sign_out": "ចាកចេញ",
+  "search_hint": "ភាពយន្ត តារា ឬប្រភេទ...",
+  "browse_categories": "រកមើលប្រភេទ",
+  "recommended_for_you": "ណែនាំសម្រាប់អ្នក",
+  "trending_searches": "ការស្វែងរកពេញនិយម",
+  "category_action": "សកម្មភាព",
+  "category_comedy": "កំប្លែង",
+  "category_horror": "រន្ធត់",
+  "category_sci_fi": "វិទ្យាសាស្ត្រ"
 }

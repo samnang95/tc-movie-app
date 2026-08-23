@@ -11,6 +11,7 @@ import '../../domain/auth/sign_out/usecases/sign_out.dart';
 import '../../domain/auth/sign_up/usecases/sign_up.dart';
 import '../../domain/auth/forgot_password/usecases/forgot_password.dart';
 import '../../domain/home/homepage/usecases/get_home_data.dart';
+import '../../domain/search/usecases/get_recommended.dart';
 
 // ── Presentation ────────────────────────────────────────────────────────
 import '../../presentation/auth/sign_in/bloc/sign_in_bloc.dart';
@@ -23,6 +24,7 @@ import '../../presentation/auth/forgot_password/pages/forgot_password_page.dart'
 import '../../presentation/dashboard/pages/dashboard_page.dart';
 import '../../presentation/home/bloc/home_bloc.dart';
 import '../../presentation/home/pages/home_page.dart';
+import '../../presentation/search/bloc/search_bloc.dart';
 import '../../presentation/search/pages/search_page.dart';
 import '../../presentation/my_list/pages/my_list_page.dart';
 import '../../presentation/profile/pages/profile_page.dart';
@@ -96,7 +98,10 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/search',
-              builder: (context, state) => const SearchPage(),
+              builder: (context, state) => BlocProvider(
+                create: (_) => SearchBloc(getRecommended: getIt<GetRecommended>()),
+                child: const SearchPage(),
+              ),
             ),
           ],
         ),
