@@ -1,26 +1,26 @@
-import '../../../domain/search/entities/search_item.dart';
+import '../../../domain/search/entities/search.dart';
 
 enum SearchStatus { initial, loading, loaded, failure }
 
 class SearchState {
   final SearchStatus status;
-  final List<SearchItem> recommended;
+  final SearchData? data;
   final String errorMessage;
 
   const SearchState({
     this.status = SearchStatus.initial,
-    this.recommended = const [],
+    this.data,
     this.errorMessage = '',
   });
 
   SearchState copyWith({
     SearchStatus? status,
-    List<SearchItem>? recommended,
+    SearchData? data,
     String? errorMessage,
   }) {
     return SearchState(
       status: status ?? this.status,
-      recommended: recommended ?? this.recommended,
+      data: data ?? this.data,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

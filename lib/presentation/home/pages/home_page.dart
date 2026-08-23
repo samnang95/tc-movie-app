@@ -23,10 +23,16 @@ class HomePage extends StatelessWidget {
     return XScaffold(
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          if (state.status == HomeStatus.loading) {
+          if (state.status == HomeStatus.loading ||
+              state.status == HomeStatus.initial) {
             return const Center(
               child: CircularProgressIndicator(color: AppColors.primary),
             );
+          }
+
+          final data = state.data;
+          if (data == null || state.status == HomeStatus.failure) {
+            return const Center(child: Text('Failed to load'));
           }
 
           return RefreshIndicator(
@@ -43,7 +49,7 @@ class HomePage extends StatelessWidget {
                   const HomeTopBar(),
 
                   // ── Hero Banner ──
-                  const HomeHeroBanner(),
+                  HomeHeroBanner(movie: data.heroMovie),
 
                   const SizedBox(height: 28),
 
@@ -52,7 +58,7 @@ class HomePage extends StatelessWidget {
                     title: 'continue_watching'.getString(context),
                   ),
                   const SizedBox(height: 14),
-                  const HomeContinueWatching(),
+                  HomeContinueWatching(items: data.continueWatching),
 
                   const SizedBox(height: 28),
 
@@ -62,16 +68,16 @@ class HomePage extends StatelessWidget {
                     showViewAll: true,
                   ),
                   const SizedBox(height: 14),
-                  const HomeTrendingNow(),
+                  HomeTrendingNow(movies: data.trendingMovies),
 
                   const SizedBox(height: 28),
 
                   // ── New Releases ──
                   HomeSectionHeader(title: 'new_releases'.getString(context)),
                   const SizedBox(height: 14),
-                  const HomeNewReleases(),
+                  HomeNewReleases(movies: data.newReleases),
 
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 80),
                 ],
               ),
             ),

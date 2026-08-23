@@ -4,23 +4,23 @@ enum HomeStatus { initial, loading, loaded, failure }
 
 class HomeState {
   final HomeStatus status;
-  final List<HomeItem> items;
+  final HomeData? data;
   final String errorMessage;
 
   const HomeState({
     this.status = HomeStatus.initial,
-    this.items = const [],
+    this.data,
     this.errorMessage = '',
   });
 
   HomeState copyWith({
     HomeStatus? status,
-    List<HomeItem>? items,
+    HomeData? data,
     String? errorMessage,
   }) {
     return HomeState(
       status: status ?? this.status,
-      items: items ?? this.items,
+      data: data ?? this.data,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

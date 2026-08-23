@@ -4,24 +4,20 @@ import '../../../../core/constants/app_colors.dart';
 import '../../shared/widgets/x_text.dart';
 
 class SearchTrendingChips extends StatelessWidget {
-  const SearchTrendingChips({super.key});
+  final List<String> trends;
 
-  static const _trendingItems = [
-    'Oscar Winners 2024',
-    'Christopher Nolan',
-    'Cyberpunk Series',
-    'Anime',
-    'Classic Noir',
-  ];
+  const SearchTrendingChips({super.key, required this.trends});
 
   @override
   Widget build(BuildContext context) {
+    if (trends.isEmpty) return const SizedBox.shrink();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Wrap(
         spacing: 10,
         runSpacing: 10,
-        children: _trendingItems.map((item) => _buildChip(item)).toList(),
+        children: trends.map((item) => _buildChip(item)).toList(),
       ),
     );
   }

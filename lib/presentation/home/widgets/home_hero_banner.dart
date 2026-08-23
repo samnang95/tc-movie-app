@@ -3,9 +3,12 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../shared/widgets/x_text.dart';
+import '../../../domain/my_list/entities/movie_detail.dart';
 
 class HomeHeroBanner extends StatelessWidget {
-  const HomeHeroBanner({super.key});
+  final MovieDetail movie;
+
+  const HomeHeroBanner({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -14,33 +17,37 @@ class HomeHeroBanner extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF2A1A1A), Color(0xFF1A0A0A), AppColors.background],
-          stops: [0.0, 0.6, 1.0],
+        image: DecorationImage(
+          image: AssetImage(movie.posterPath),
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
+          colorFilter: ColorFilter.mode(
+            AppColors.background.withValues(alpha: 0.3),
+            BlendMode.darken,
+          ),
         ),
         border: Border.all(color: AppColors.white.withValues(alpha: 0.04)),
       ),
       child: Stack(
         children: [
-          // Cinematic top glow
+          // Bottom gradient for text legibility
           Positioned(
-            top: 0,
+            bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              height: 120,
+              height: 200,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
+                  bottom: Radius.circular(16),
                 ),
-                gradient: RadialGradient(
-                  center: Alignment.topCenter,
-                  radius: 1.2,
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.25),
                     AppColors.transparent,
+                    AppColors.background.withValues(alpha: 0.9),
+                    AppColors.background,
                   ],
                 ),
               ),
@@ -57,19 +64,23 @@ class HomeHeroBanner extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Badges
-                Row(
-                  children: [
-                    _buildBadge('SCI-FI EPIC'),
-                    const SizedBox(width: 8),
-                    _buildBadge('4K ULTRA HD'),
-                  ],
-                ),
+                if (movie.badges.isNotEmpty)
+                  Row(
+                    children: movie.badges
+                        .map(
+                          (badge) => Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: _buildBadge(badge.toUpperCase()),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 const SizedBox(height: 14),
 
                 // Movie Title
-                const XText(
-                  'NEON\nDRIFTER',
-                  fontSize: 42,
+                XText(
+                  movie.title.toUpperCase(),
+                  fontSize: 36,
                   fontWeight: FontWeight.w900,
                   color: AppColors.white,
                   height: 1.0,

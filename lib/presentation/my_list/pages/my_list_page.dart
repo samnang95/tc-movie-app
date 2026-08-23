@@ -56,7 +56,8 @@ class MyListPage extends StatelessWidget {
                           MovieCastSection(movie: movie),
                           const SizedBox(height: 36),
                           RelatedMoviesSection(movie: movie),
-                          const SizedBox(height: 80),
+                          // Extra padding for the floating nav bar
+                          const SizedBox(height: 100),
                         ],
                       ),
                     ),

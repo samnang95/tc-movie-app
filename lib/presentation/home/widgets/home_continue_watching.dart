@@ -2,24 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../shared/widgets/x_text.dart';
-
-class _ContinueItem {
-  final String title;
-  final String remaining;
-  final double progress;
-  _ContinueItem(this.title, this.remaining, this.progress);
-}
+import '../../../domain/profile/entities/watch_history_item.dart';
 
 class HomeContinueWatching extends StatelessWidget {
-  const HomeContinueWatching({super.key});
+  final List<WatchHistoryItem> items;
+
+  const HomeContinueWatching({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      _ContinueItem('Shadow Protocol: Ep 4', '32m remaining', 0.65),
-      _ContinueItem('The Last Silence', '1h 14m remaining', 0.30),
-      _ContinueItem('Crimson Tide', '45m remaining', 0.50),
-    ];
+    if (items.isEmpty) return const SizedBox.shrink();
 
     return SizedBox(
       height: 180,
@@ -41,16 +33,19 @@ class HomeContinueWatching extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.surface,
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [AppColors.tertiary, AppColors.surface],
+                    image: DecorationImage(
+                      image: AssetImage(item.imagePath),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        AppColors.black.withValues(alpha: 0.3),
+                        BlendMode.darken,
+                      ),
                     ),
                   ),
                   child: Center(
                     child: Icon(
                       Icons.play_circle_outline_rounded,
-                      color: AppColors.white.withValues(alpha: 0.30),
+                      color: AppColors.white.withValues(alpha: 0.8),
                       size: 36,
                     ),
                   ),
@@ -58,33 +53,38 @@ class HomeContinueWatching extends StatelessWidget {
                 const SizedBox(height: 6),
 
                 // Progress bar
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(2),
-                  child: LinearProgressIndicator(
-                    value: item.progress,
-                    backgroundColor: AppColors.white.withValues(alpha: 0.10),
-                    color: AppColors.primary,
-                    minHeight: 3,
+                Container(
+                  height: 3,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.white.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: item.progress,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 8),
 
-                // Title
+                // Details
                 XText(
                   item.title,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
-
-                // Remaining
                 XText(
-                  item.remaining,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
+                  item.subtitle,
+                  fontSize: 12,
                   color: AppColors.textSecondary,
                 ),
               ],

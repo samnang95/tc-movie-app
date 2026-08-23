@@ -1,49 +1,69 @@
-import '../../../core/network/api_client.dart';
-import '../models/search_model.dart';
+import '../../../domain/my_list/entities/movie_detail.dart';
+import '../../../domain/search/entities/search.dart';
 
-/// Remote data source for search data.
 class SearchRemoteDataSource {
-  // ignore: unused_field
-  final ApiClient _apiClient;
+  Future<SearchData> getSearchData() async {
+    // Simulate network delay
+    await Future.delayed(const Duration(milliseconds: 1500));
 
-  SearchRemoteDataSource(this._apiClient);
-
-  /// Mocked: Returns recommended movies for development.
-  Future<List<SearchModel>> getRecommended() async {
-    await Future.delayed(const Duration(milliseconds: 800));
-    return const [
-      SearchModel(
-        id: 1,
-        title: 'Shadow Protocol',
-        genre: 'Thriller',
-        duration: '2h 15m',
-        is4K: true,
-        isNew: true,
-      ),
-      SearchModel(
-        id: 2,
-        title: 'Neon Velocity',
-        genre: 'Action',
-        duration: '1h 48m',
-        is4K: true,
-        isNew: false,
-      ),
-      SearchModel(
-        id: 3,
-        title: 'Dark Matter',
-        genre: 'Sci-Fi',
-        duration: '2h 02m',
-        is4K: false,
-        isNew: true,
-      ),
-      SearchModel(
-        id: 4,
-        title: 'Crimson Dawn',
-        genre: 'Drama',
-        duration: '1h 56m',
-        is4K: false,
-        isNew: false,
-      ),
-    ];
+    return SearchData(
+      trendingSearches: [
+        'Cyberpunk 2077',
+        'Interstellar',
+        'Space Opera',
+        'Dystopian',
+        'Time Travel',
+      ],
+      recommended: [
+        MovieDetail(
+          title: 'Infinite Harmony',
+          posterPath: 'assets/images/related_1_1787453232488.jpg',
+          badges: ['ORIGINAL SERIES'],
+          year: '2024',
+          rating: 4.8,
+          duration: '1h 45m',
+          ageRating: 'PG-13',
+          synopsis: 'Sci-Fi',
+          cast: [],
+          relatedMovies: [],
+        ),
+        MovieDetail(
+          title: 'Midnight Run',
+          posterPath: 'assets/images/related_2_1787453244858.jpg',
+          badges: [],
+          year: '2023',
+          rating: 4.5,
+          duration: '2h 10m',
+          ageRating: 'R',
+          synopsis: 'Action',
+          cast: [],
+          relatedMovies: [],
+        ),
+        MovieDetail(
+          title: 'Chrome Hearts',
+          posterPath: 'assets/images/related_3_1787453258578.jpg',
+          badges: [],
+          year: '2024',
+          rating: 4.2,
+          duration: '1h 55m',
+          ageRating: 'PG-13',
+          synopsis: 'Thriller',
+          cast: [],
+          relatedMovies: [],
+        ),
+        MovieDetail(
+          title: 'Neon Shadows',
+          posterPath: 'assets/images/related_4_1787453270743.jpg',
+          badges: ['ORIGINAL SERIES'],
+          year: '2024',
+          rating: 4.9,
+          duration: '2h 30m',
+          ageRating: 'R',
+          synopsis: 'Sci-Fi',
+          cast: [],
+          relatedMovies: [],
+        ),
+      ],
+    );
   }
 }

@@ -2,34 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../shared/widgets/x_text.dart';
-
-class _TrendingItem {
-  final String title;
-  final int rank;
-  _TrendingItem(this.title, this.rank);
-}
+import '../../../domain/my_list/entities/movie_detail.dart';
 
 class HomeTrendingNow extends StatelessWidget {
-  const HomeTrendingNow({super.key});
+  final List<MovieDetail> movies;
+
+  const HomeTrendingNow({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      _TrendingItem('Void Voyager', 1),
-      _TrendingItem('Red District', 2),
-      _TrendingItem('Velocity', 3),
-      _TrendingItem('Dark Ember', 4),
-    ];
+    if (movies.isEmpty) return const SizedBox.shrink();
 
     return SizedBox(
       height: 220,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
+        itemCount: movies.length,
         separatorBuilder: (_, i) => const SizedBox(width: 14),
         itemBuilder: (context, index) {
-          final item = items[index];
+          final movie = movies[index];
+          final rank = index + 1;
+
           return SizedBox(
             width: 130,
             child: Column(
@@ -42,28 +36,17 @@ class HomeTrendingNow extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary.withValues(alpha: 0.15),
-                              AppColors.surface,
-                            ],
+                          image: DecorationImage(
+                            image: AssetImage(movie.posterPath),
+                            fit: BoxFit.cover,
                           ),
                           border: Border.all(
                             color: AppColors.white.withValues(alpha: 0.06),
                           ),
                         ),
-                        child: Center(
-                          child: Icon(
-                            Icons.movie_filter_outlined,
-                            color: AppColors.primary.withValues(alpha: 0.40),
-                            size: 40,
-                          ),
-                        ),
                       ),
                       // TOP 10 badge
-                      if (item.rank <= 3)
+                      if (rank <= 3)
                         Positioned(
                           left: 8,
                           bottom: 8,
@@ -77,7 +60,7 @@ class HomeTrendingNow extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: XText(
-                              'TOP ${item.rank}0',
+                              'TOP ${rank}0',
                               fontSize: 9,
                               fontWeight: FontWeight.w800,
                               color: AppColors.white,
@@ -92,7 +75,7 @@ class HomeTrendingNow extends StatelessWidget {
 
                 // Title
                 XText(
-                  item.title,
+                  movie.title,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,
