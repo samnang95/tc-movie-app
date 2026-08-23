@@ -2,11 +2,12 @@ import '../../../../core/error/failures.dart';
 import '../entities/home.dart';
 import '../repositories/home_repository.dart';
 
-/// Use case: Fetch home page data.
 class GetHomeData {
-  final HomeRepository _repository;
+  final HomeRepository repository;
 
-  GetHomeData(this._repository);
+  GetHomeData(this.repository);
 
-  Future<(Failure?, List<HomeItem>?)> call() => _repository.getHomeData();
+  Future<(Failure?, HomeData?)> call() async {
+    return await repository.getHomeData();
+  }
 }

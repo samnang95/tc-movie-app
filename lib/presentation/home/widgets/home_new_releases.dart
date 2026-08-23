@@ -3,34 +3,29 @@ import 'package:flutter_localization/flutter_localization.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../shared/widgets/x_text.dart';
-
-class _ReleaseItem {
-  final String title;
-  final bool isOriginal;
-  _ReleaseItem(this.title, this.isOriginal);
-}
+import '../../../domain/my_list/entities/movie_detail.dart';
 
 class HomeNewReleases extends StatelessWidget {
-  const HomeNewReleases({super.key});
+  final List<MovieDetail> movies;
+
+  const HomeNewReleases({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      _ReleaseItem('Infinite Harmony', true),
-      _ReleaseItem('Midnight Run', false),
-      _ReleaseItem('Chrome Hearts', false),
-      _ReleaseItem('Neon Shadows', true),
-    ];
+    if (movies.isEmpty) return const SizedBox.shrink();
 
     return SizedBox(
       height: 230,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: items.length,
+        itemCount: movies.length,
         separatorBuilder: (_, i) => const SizedBox(width: 14),
         itemBuilder: (context, index) {
-          final item = items[index];
+          final movie = movies[index];
+          // We can simulate 'isOriginal' if it has a certain badge, or just true for the first few.
+          final isOriginal = index % 2 == 0;
+
           return SizedBox(
             width: 150,
             child: Column(
@@ -43,28 +38,17 @@ class HomeNewReleases extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              AppColors.primary.withValues(alpha: 0.10),
-                              AppColors.tertiary,
-                            ],
+                          image: DecorationImage(
+                            image: AssetImage(movie.posterPath),
+                            fit: BoxFit.cover,
                           ),
                           border: Border.all(
                             color: AppColors.white.withValues(alpha: 0.06),
                           ),
                         ),
-                        child: Center(
-                          child: Icon(
-                            Icons.theaters_rounded,
-                            color: AppColors.primary.withValues(alpha: 0.30),
-                            size: 40,
-                          ),
-                        ),
                       ),
                       // ORIGINAL SERIES badge
-                      if (item.isOriginal)
+                      if (isOriginal)
                         Positioned(
                           left: 8,
                           bottom: 8,
@@ -93,7 +77,7 @@ class HomeNewReleases extends StatelessWidget {
 
                 // Title
                 XText(
-                  item.title,
+                  movie.title,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: AppColors.white,

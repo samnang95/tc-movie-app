@@ -11,7 +11,7 @@ import '../../domain/auth/sign_out/usecases/sign_out.dart';
 import '../../domain/auth/sign_up/usecases/sign_up.dart';
 import '../../domain/auth/forgot_password/usecases/forgot_password.dart';
 import '../../domain/home/homepage/usecases/get_home_data.dart';
-import '../../domain/search/usecases/get_recommended.dart';
+import '../../domain/search/usecases/get_search_data.dart';
 
 // ── Presentation ────────────────────────────────────────────────────────
 import '../../presentation/auth/sign_in/bloc/sign_in_bloc.dart';
@@ -23,9 +23,12 @@ import '../../presentation/auth/forgot_password/bloc/forgot_password_bloc.dart';
 import '../../presentation/auth/forgot_password/pages/forgot_password_page.dart';
 import '../../presentation/dashboard/pages/dashboard_page.dart';
 import '../../presentation/home/bloc/home_bloc.dart';
+import '../../presentation/home/bloc/home_event.dart';
 import '../../presentation/home/pages/home_page.dart';
 import '../../presentation/search/bloc/search_bloc.dart';
 import '../../presentation/search/pages/search_page.dart';
+import '../../presentation/profile/bloc/profile_bloc.dart';
+import '../../presentation/profile/bloc/profile_event.dart';
 import '../../presentation/my_list/pages/my_list_page.dart';
 import '../../presentation/profile/pages/profile_page.dart';
 
@@ -41,10 +44,12 @@ final GoRouter appRouter = GoRouter(
     final isOnSignUp = state.matchedLocation == '/sign-up';
     final isOnForgotPassword = state.matchedLocation == '/forgot-password';
 
-    if (!isLoggedIn && !isOnSignIn && !isOnSignUp && !isOnForgotPassword)
+    if (!isLoggedIn && !isOnSignIn && !isOnSignUp && !isOnForgotPassword) {
       return '/sign-in';
-    if (isLoggedIn && (isOnSignIn || isOnSignUp || isOnForgotPassword))
+    }
+    if (isLoggedIn && (isOnSignIn || isOnSignUp || isOnForgotPassword)) {
       return '/home';
+    }
     return null;
   },
   routes: [
@@ -88,7 +93,9 @@ final GoRouter appRouter = GoRouter(
               builder: (context, state) => MultiBlocProvider(
                 providers: [
                   BlocProvider(
-                    create: (_) => HomeBloc(getHomeData: getIt<GetHomeData>()),
+                    create: (_) =>
+                        HomeBloc(getHomeData: getIt<GetHomeData>())
+                          ..add(const HomeDataRequested()),
                   ),
                 ],
                 child: const HomePage(),
@@ -103,7 +110,7 @@ final GoRouter appRouter = GoRouter(
               path: '/search',
               builder: (context, state) => BlocProvider(
                 create: (_) =>
-                    SearchBloc(getRecommended: getIt<GetRecommended>()),
+                    SearchBloc(getSearchData: getIt<GetSearchData>()),
                 child: const SearchPage(),
               ),
             ),
@@ -123,8 +130,16 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) => BlocProvider(
-                create: (_) => SignOutBloc(signOut: getIt<SignOut>()),
+              builder: (context, state) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (_) => SignOutBloc(signOut: getIt<SignOut>()),
+                  ),
+                  BlocProvider(
+                    create: (_) =>
+                        getIt<ProfileBloc>()..add(LoadProfileEvent()),
+                  ),
+                ],
                 child: const ProfilePage(),
               ),
             ),

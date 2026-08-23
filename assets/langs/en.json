@@ -54,5 +54,15 @@
   "synopsis": "SYNOPSIS",
   "cast": "CAST",
   "see_all": "SEE ALL",
-  "related_movies": "RELATED MOVIES"
+  "related_movies": "RELATED MOVIES",
+  "premium_member": "PREMIUM MEMBER",
+  "edit": "Edit",
+  "watch_history": "Watch History",
+  "clear": "Clear",
+  "settings": "Settings",
+  "account_information": "Account Information",
+  "notifications": "Notifications",
+  "downloads": "Downloads",
+  "privacy_security": "Privacy & Security",
+  "share": "Share"
 }

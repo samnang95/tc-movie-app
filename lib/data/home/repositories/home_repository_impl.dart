@@ -1,4 +1,3 @@
-import '../../../core/error/exceptions.dart';
 import '../../../core/error/failures.dart';
 import '../../../domain/home/homepage/entities/home.dart';
 import '../../../domain/home/homepage/repositories/home_repository.dart';
@@ -10,17 +9,12 @@ class HomeRepositoryImpl implements HomeRepository {
   HomeRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<(Failure?, List<HomeItem>?)> getHomeData() async {
+  Future<(Failure?, HomeData?)> getHomeData() async {
     try {
-      final models = await _remoteDataSource.getHomeData();
-      final entities = models.map((m) => m.toEntity()).toList();
-      return (null, entities);
-    } on NetworkException {
-      return (const NetworkFailure(), null);
-    } on AppException catch (e) {
-      return (ServerFailure(e.message), null);
+      final homeData = await _remoteDataSource.getHomeData();
+      return (null, homeData);
     } catch (e) {
-      return (ServerFailure(e.toString()), null);
+      return (const ServerFailure(), null);
     }
   }
 }

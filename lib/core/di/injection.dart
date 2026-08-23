@@ -46,7 +46,7 @@ import '../../domain/home/homepage/usecases/get_home_data.dart';
 
 // ── Domain: Search ──────────────────────────────────────────────────────
 import '../../domain/search/repositories/search_repository.dart';
-import '../../domain/search/usecases/get_recommended.dart';
+import '../../domain/search/usecases/get_search_data.dart';
 
 // ── MyList ──────────────────────────────────────────────────────────────
 import '../../domain/my_list/repositories/my_list_repository.dart';
@@ -54,6 +54,13 @@ import '../../domain/my_list/usecases/get_my_list_movie.dart';
 import '../../data/my_list/datasources/my_list_remote_datasource.dart';
 import '../../data/my_list/repositories/my_list_repository_impl.dart';
 import '../../presentation/my_list/bloc/my_list_bloc.dart';
+
+// ── Profile ─────────────────────────────────────────────────────────────
+import '../../domain/profile/repositories/profile_repository.dart';
+import '../../domain/profile/usecases/get_profile.dart';
+import '../../data/profile/datasources/profile_remote_datasource.dart';
+import '../../data/profile/repositories/profile_repository_impl.dart';
+import '../../presentation/profile/bloc/profile_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -87,7 +94,7 @@ Future<void> setupInjection() async {
     () => RefreshTokenRemoteDataSource(getIt<SecureStorage>()),
   );
   getIt.registerLazySingleton<HomeRemoteDataSource>(
-    () => HomeRemoteDataSource(getIt<ApiClient>()),
+    () => HomeRemoteDataSource(),
   );
   getIt.registerLazySingleton<SignUpRemoteDataSource>(
     () => SignUpRemoteDataSource(getIt<ApiClient>()),
@@ -96,10 +103,13 @@ Future<void> setupInjection() async {
     () => ForgotPasswordRemoteDataSource(getIt<ApiClient>()),
   );
   getIt.registerLazySingleton<SearchRemoteDataSource>(
-    () => SearchRemoteDataSource(getIt<ApiClient>()),
+    () => SearchRemoteDataSource(),
   );
   getIt.registerLazySingleton<MyListRemoteDataSource>(
     () => MyListRemoteDataSourceImpl(),
+  );
+  getIt.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(),
   );
 
   // ── Repositories ──────────────────────────────────────────────────────
@@ -136,6 +146,9 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton<MyListRepository>(
     () => MyListRepositoryImpl(getIt<MyListRemoteDataSource>()),
   );
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(getIt<ProfileRemoteDataSource>()),
+  );
 
   // ── Use Cases ─────────────────────────────────────────────────────────
   getIt.registerLazySingleton(() => SignIn(getIt<SignInRepository>()));
@@ -151,9 +164,11 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton(
     () => ForgotPassword(getIt<ForgotPasswordRepository>()),
   );
-  getIt.registerLazySingleton(() => GetRecommended(getIt<SearchRepository>()));
+  getIt.registerLazySingleton(() => GetSearchData(getIt<SearchRepository>()));
   getIt.registerLazySingleton(() => GetMyListMovie(getIt<MyListRepository>()));
+  getIt.registerLazySingleton(() => GetProfile(getIt<ProfileRepository>()));
 
   // ── Blocs ─────────────────────────────────────────────────────────────
   getIt.registerFactory(() => MyListBloc(getIt<GetMyListMovie>()));
+  getIt.registerFactory(() => ProfileBloc(getIt<GetProfile>()));
 }
