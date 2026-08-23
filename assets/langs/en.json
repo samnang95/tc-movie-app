@@ -41,5 +41,13 @@
   "nav_home": "Home",
   "nav_search": "Search",
   "nav_profile": "Profile",
-  "sign_out": "Sign Out"
+  "sign_out": "Sign Out",
+  "search_hint": "Movies, actors, or genres...",
+  "browse_categories": "Browse Categories",
+  "recommended_for_you": "Recommended for You",
+  "trending_searches": "Trending Searches",
+  "category_action": "Action",
+  "category_comedy": "Comedy",
+  "category_horror": "Horror",
+  "category_sci_fi": "Sci-Fi"
 }
