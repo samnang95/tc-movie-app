@@ -10,8 +10,8 @@ class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
   @override
   Future<(Failure?, bool?)> refreshToken() async {
     try {
-      final storedRefreshToken =
-          await _remoteDataSource.getStoredRefreshToken();
+      final storedRefreshToken = await _remoteDataSource
+          .getStoredRefreshToken();
 
       if (storedRefreshToken == null || storedRefreshToken.isEmpty) {
         await _remoteDataSource.clearTokens();
@@ -30,7 +30,10 @@ class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     } catch (e) {
       // Refresh failed — clear everything and force re-login
       await _remoteDataSource.clearTokens();
-      return (const AuthFailure('Session expired. Please sign in again.'), null);
+      return (
+        const AuthFailure('Session expired. Please sign in again.'),
+        null,
+      );
     }
   }
 }

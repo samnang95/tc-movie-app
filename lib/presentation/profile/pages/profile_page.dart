@@ -35,7 +35,8 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               XButton(
-                onPressed: () => context.read<SignOutBloc>().add(const SignOutRequested()),
+                onPressed: () =>
+                    context.read<SignOutBloc>().add(const SignOutRequested()),
                 label: 'sign_out'.getString(context),
               ),
             ],

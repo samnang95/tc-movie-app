@@ -34,20 +34,18 @@ class RefreshTokenRemoteDataSource {
   }
 
   /// Read the stored refresh token.
-  Future<String?> getStoredRefreshToken() =>
-      _secureStorage.getRefreshToken();
+  Future<String?> getStoredRefreshToken() => _secureStorage.getRefreshToken();
 
   /// Save new tokens after a successful refresh.
   Future<void> saveTokens({
     required String accessToken,
     required String refreshToken,
     String? expiresAt,
-  }) =>
-      _secureStorage.saveTokens(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        expiresAt: expiresAt,
-      );
+  }) => _secureStorage.saveTokens(
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    expiresAt: expiresAt,
+  );
 
   /// Clear all tokens (failed refresh → force logout).
   Future<void> clearTokens() => _secureStorage.clearAll();

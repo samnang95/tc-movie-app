@@ -17,16 +17,10 @@ class HomeHeroBanner extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFF2A1A1A),
-            Color(0xFF1A0A0A),
-            AppColors.background,
-          ],
+          colors: [Color(0xFF2A1A1A), Color(0xFF1A0A0A), AppColors.background],
           stops: [0.0, 0.6, 1.0],
         ),
-        border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.04),
-        ),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.04)),
       ),
       child: Stack(
         children: [
@@ -38,7 +32,9 @@ class HomeHeroBanner extends StatelessWidget {
             child: Container(
               height: 120,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
                 gradient: RadialGradient(
                   center: Alignment.topCenter,
                   radius: 1.2,
@@ -113,9 +109,7 @@ class HomeHeroBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.08),
-        ),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.08)),
       ),
       child: XText(
         text,

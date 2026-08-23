@@ -8,8 +8,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final GetRecommended _getRecommended;
 
   SearchBloc({required GetRecommended getRecommended})
-      : _getRecommended = getRecommended, // ignore: prefer_initializing_formals
-        super(const SearchState()) {
+    : _getRecommended = getRecommended, // ignore: prefer_initializing_formals
+      super(const SearchState()) {
     on<SearchDataRequested>(_onDataRequested);
 
     // Auto-fetch on creation
@@ -25,15 +25,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     final (failure, items) = await _getRecommended();
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: SearchStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: SearchStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
-      emit(state.copyWith(
-        status: SearchStatus.loaded,
-        recommended: items ?? [],
-      ));
+      emit(
+        state.copyWith(status: SearchStatus.loaded, recommended: items ?? []),
+      );
     }
   }
 }

@@ -48,6 +48,13 @@ import '../../domain/home/homepage/usecases/get_home_data.dart';
 import '../../domain/search/repositories/search_repository.dart';
 import '../../domain/search/usecases/get_recommended.dart';
 
+// ── MyList ──────────────────────────────────────────────────────────────
+import '../../domain/my_list/repositories/my_list_repository.dart';
+import '../../domain/my_list/usecases/get_my_list_movie.dart';
+import '../../data/my_list/datasources/my_list_remote_datasource.dart';
+import '../../data/my_list/repositories/my_list_repository_impl.dart';
+import '../../presentation/my_list/bloc/my_list_bloc.dart';
+
 final getIt = GetIt.instance;
 
 /// Initialise all dependencies.
@@ -67,32 +74,86 @@ Future<void> setupInjection() async {
   getIt.registerLazySingleton<ApiClient>(() => ApiClient());
 
   // ── Data Sources ──────────────────────────────────────────────────────
-  getIt.registerLazySingleton<SignInRemoteDataSource>(() => SignInRemoteDataSource(getIt<ApiClient>()));
-  getIt.registerLazySingleton<SignOutLocalDataSource>(() => SignOutLocalDataSource(getIt<SecureStorage>()));
-  getIt.registerLazySingleton<CurrentUserLocalDataSource>(() => CurrentUserLocalDataSource(getIt<SecureStorage>()));
-  getIt.registerLazySingleton<RefreshTokenRemoteDataSource>(() => RefreshTokenRemoteDataSource(getIt<SecureStorage>()));
-  getIt.registerLazySingleton<HomeRemoteDataSource>(() => HomeRemoteDataSource(getIt<ApiClient>()));
-  getIt.registerLazySingleton<SignUpRemoteDataSource>(() => SignUpRemoteDataSource(getIt<ApiClient>()));
-  getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(() => ForgotPasswordRemoteDataSource(getIt<ApiClient>()));
-  getIt.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSource(getIt<ApiClient>()));
+  getIt.registerLazySingleton<SignInRemoteDataSource>(
+    () => SignInRemoteDataSource(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<SignOutLocalDataSource>(
+    () => SignOutLocalDataSource(getIt<SecureStorage>()),
+  );
+  getIt.registerLazySingleton<CurrentUserLocalDataSource>(
+    () => CurrentUserLocalDataSource(getIt<SecureStorage>()),
+  );
+  getIt.registerLazySingleton<RefreshTokenRemoteDataSource>(
+    () => RefreshTokenRemoteDataSource(getIt<SecureStorage>()),
+  );
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSource(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<SignUpRemoteDataSource>(
+    () => SignUpRemoteDataSource(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<ForgotPasswordRemoteDataSource>(
+    () => ForgotPasswordRemoteDataSource(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSource(getIt<ApiClient>()),
+  );
+  getIt.registerLazySingleton<MyListRemoteDataSource>(
+    () => MyListRemoteDataSourceImpl(),
+  );
 
   // ── Repositories ──────────────────────────────────────────────────────
-  getIt.registerLazySingleton<SignInRepository>(() => SignInRepositoryImpl(getIt<SignInRemoteDataSource>(), getIt<SecureStorage>()));
-  getIt.registerLazySingleton<SignOutRepository>(() => SignOutRepositoryImpl(getIt<SignOutLocalDataSource>()));
-  getIt.registerLazySingleton<CurrentUserRepository>(() => CurrentUserRepositoryImpl(getIt<CurrentUserLocalDataSource>()));
-  getIt.registerLazySingleton<RefreshTokenRepository>(() => RefreshTokenRepositoryImpl(getIt<RefreshTokenRemoteDataSource>()));
-  getIt.registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(getIt<HomeRemoteDataSource>()));
-  getIt.registerLazySingleton<SignUpRepository>(() => SignUpRepositoryImpl(getIt<SignUpRemoteDataSource>(), getIt<SecureStorage>()));
-  getIt.registerLazySingleton<ForgotPasswordRepository>(() => ForgotPasswordRepositoryImpl(getIt<ForgotPasswordRemoteDataSource>()));
-  getIt.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(getIt<SearchRemoteDataSource>()));
+  getIt.registerLazySingleton<SignInRepository>(
+    () => SignInRepositoryImpl(
+      getIt<SignInRemoteDataSource>(),
+      getIt<SecureStorage>(),
+    ),
+  );
+  getIt.registerLazySingleton<SignOutRepository>(
+    () => SignOutRepositoryImpl(getIt<SignOutLocalDataSource>()),
+  );
+  getIt.registerLazySingleton<CurrentUserRepository>(
+    () => CurrentUserRepositoryImpl(getIt<CurrentUserLocalDataSource>()),
+  );
+  getIt.registerLazySingleton<RefreshTokenRepository>(
+    () => RefreshTokenRepositoryImpl(getIt<RefreshTokenRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(getIt<HomeRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<SignUpRepository>(
+    () => SignUpRepositoryImpl(
+      getIt<SignUpRemoteDataSource>(),
+      getIt<SecureStorage>(),
+    ),
+  );
+  getIt.registerLazySingleton<ForgotPasswordRepository>(
+    () => ForgotPasswordRepositoryImpl(getIt<ForgotPasswordRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(getIt<SearchRemoteDataSource>()),
+  );
+  getIt.registerLazySingleton<MyListRepository>(
+    () => MyListRepositoryImpl(getIt<MyListRemoteDataSource>()),
+  );
 
   // ── Use Cases ─────────────────────────────────────────────────────────
   getIt.registerLazySingleton(() => SignIn(getIt<SignInRepository>()));
   getIt.registerLazySingleton(() => SignOut(getIt<SignOutRepository>()));
-  getIt.registerLazySingleton(() => GetCurrentUser(getIt<CurrentUserRepository>()));
-  getIt.registerLazySingleton(() => RefreshToken(getIt<RefreshTokenRepository>()));
+  getIt.registerLazySingleton(
+    () => GetCurrentUser(getIt<CurrentUserRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => RefreshToken(getIt<RefreshTokenRepository>()),
+  );
   getIt.registerLazySingleton(() => GetHomeData(getIt<HomeRepository>()));
   getIt.registerLazySingleton(() => SignUp(getIt<SignUpRepository>()));
-  getIt.registerLazySingleton(() => ForgotPassword(getIt<ForgotPasswordRepository>()));
+  getIt.registerLazySingleton(
+    () => ForgotPassword(getIt<ForgotPasswordRepository>()),
+  );
   getIt.registerLazySingleton(() => GetRecommended(getIt<SearchRepository>()));
+  getIt.registerLazySingleton(() => GetMyListMovie(getIt<MyListRepository>()));
+
+  // ── Blocs ─────────────────────────────────────────────────────────────
+  getIt.registerFactory(() => MyListBloc(getIt<GetMyListMovie>()));
 }

@@ -8,9 +8,6 @@ class UserModel {
 
   /// Map data model → domain entity.
   User toEntity() {
-    return User(
-      accessToken: accessToken,
-      isAuthenticated: true,
-    );
+    return User(accessToken: accessToken, isAuthenticated: true);
   }
 }

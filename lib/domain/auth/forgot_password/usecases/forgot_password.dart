@@ -7,8 +7,6 @@ class ForgotPassword {
 
   ForgotPassword(this._repository);
 
-  Future<(Failure?, ForgotPasswordResult?)> call({
-    required String email,
-  }) =>
+  Future<(Failure?, ForgotPasswordResult?)> call({required String email}) =>
       _repository.forgotPassword(email: email);
 }

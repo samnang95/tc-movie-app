@@ -7,10 +7,7 @@ import '../../shared/widgets/x_scaffold.dart';
 class DashboardPage extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
-  const DashboardPage({
-    super.key,
-    required this.navigationShell,
-  });
+  const DashboardPage({super.key, required this.navigationShell});
 
   void _onNavigationItemSelected(int index) {
     navigationShell.goBranch(

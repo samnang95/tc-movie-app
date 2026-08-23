@@ -106,9 +106,8 @@ class SignUpPage extends StatelessWidget {
                 prefixIcon: Icons.mail_outline_rounded,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                onChanged: (value) => context.read<SignUpBloc>().add(
-                  SignUpEmailChanged(value),
-                ),
+                onChanged: (value) =>
+                    context.read<SignUpBloc>().add(SignUpEmailChanged(value)),
               ),
               const SizedBox(height: 20),
 
@@ -226,9 +225,8 @@ class SignUpPage extends StatelessWidget {
                   return XButton(
                     label: 'sign_up'.getString(context),
                     isLoading: state.status == SignUpStatus.loading,
-                    onPressed: () => context.read<SignUpBloc>().add(
-                      const SignUpSubmitted(),
-                    ),
+                    onPressed: () =>
+                        context.read<SignUpBloc>().add(const SignUpSubmitted()),
                   );
                 },
               ),
@@ -246,7 +244,9 @@ class SignUpPage extends StatelessWidget {
                         color: AppColors.white.withValues(alpha: 0.50),
                       ),
                       children: [
-                        TextSpan(text: 'already_have_account'.getString(context)),
+                        TextSpan(
+                          text: 'already_have_account'.getString(context),
+                        ),
                         TextSpan(
                           text: 'sign_in'.getString(context),
                           style: const TextStyle(

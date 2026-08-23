@@ -90,9 +90,7 @@ class ApiClient {
   }
 
   // ── Error mapping ───────────────────────────────────────────────────
-  Future<Response> _handleRequest(
-    Future<Response> Function() request,
-  ) async {
+  Future<Response> _handleRequest(Future<Response> Function() request) async {
     try {
       return await request();
     } on DioException catch (e) {
@@ -113,24 +111,21 @@ class ApiClient {
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
         final data = error.response?.data;
-        final message =
-            data is Map<String, dynamic> ? data['message'] as String? : null;
+        final message = data is Map<String, dynamic>
+            ? data['message'] as String?
+            : null;
 
         return switch (statusCode) {
           400 => BadRequestException(
-              message: message ?? 'Bad request',
-              data: data,
-            ),
-          401 => UnauthorizedException(
-              message: message ?? 'Unauthorized',
-            ),
-          404 => NotFoundException(
-              message: message ?? 'Resource not found',
-            ),
+            message: message ?? 'Bad request',
+            data: data,
+          ),
+          401 => UnauthorizedException(message: message ?? 'Unauthorized'),
+          404 => NotFoundException(message: message ?? 'Resource not found'),
           _ => ServerException(
-              message: message ?? 'Server error',
-              statusCode: statusCode,
-            ),
+            message: message ?? 'Server error',
+            statusCode: statusCode,
+          ),
         };
 
       case DioExceptionType.cancel:

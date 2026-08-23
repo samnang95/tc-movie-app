@@ -94,10 +94,12 @@ class SearchRecommended extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (item.is4K)
-                        _buildBadge('4K', AppColors.white.withValues(alpha: 0.20)),
+                        _buildBadge(
+                          '4K',
+                          AppColors.white.withValues(alpha: 0.20),
+                        ),
                       if (item.is4K && item.isNew) const SizedBox(width: 6),
-                      if (item.isNew)
-                        _buildBadge('NEW', AppColors.primary),
+                      if (item.isNew) _buildBadge('NEW', AppColors.primary),
                     ],
                   ),
                 ),

@@ -10,8 +10,8 @@ class SignUpRequestModel {
   });
 
   Map<String, dynamic> toJson() => {
-        'full_name': fullName,
-        'email': email,
-        'password': password,
-      };
+    'full_name': fullName,
+    'email': email,
+    'password': password,
+  };
 }

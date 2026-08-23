@@ -122,10 +122,9 @@ class ForgotPasswordPage extends StatelessWidget {
                       prefixIcon: Icons.mail_outline_rounded,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.done,
-                      onChanged: (value) =>
-                          context.read<ForgotPasswordBloc>().add(
-                            ForgotPasswordEmailChanged(value),
-                          ),
+                      onChanged: (value) => context
+                          .read<ForgotPasswordBloc>()
+                          .add(ForgotPasswordEmailChanged(value)),
                     ),
                     const SizedBox(height: 24),
 
@@ -137,10 +136,9 @@ class ForgotPasswordPage extends StatelessWidget {
                           label: 'send_link'.getString(context),
                           isLoading:
                               state.status == ForgotPasswordStatus.loading,
-                          onPressed: () =>
-                              context.read<ForgotPasswordBloc>().add(
-                                const ForgotPasswordSubmitted(),
-                              ),
+                          onPressed: () => context
+                              .read<ForgotPasswordBloc>()
+                              .add(const ForgotPasswordSubmitted()),
                         );
                       },
                     ),

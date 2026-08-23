@@ -39,10 +39,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     Emitter<SignInState> emit,
   ) async {
     if (state.email.isEmpty || state.password.isEmpty) {
-      emit(state.copyWith(
-        status: SignInStatus.failure,
-        errorMessage: 'Please fill in all fields',
-      ));
+      emit(
+        state.copyWith(
+          status: SignInStatus.failure,
+          errorMessage: 'Please fill in all fields',
+        ),
+      );
       return;
     }
 
@@ -54,10 +56,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     );
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: SignInStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: SignInStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
       emit(state.copyWith(status: SignInStatus.success));
     }

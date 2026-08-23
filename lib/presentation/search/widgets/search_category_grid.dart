@@ -73,9 +73,7 @@ class SearchCategoryGrid extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: category.gradientColors,
         ),
-        border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.06),
-        ),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.06)),
         boxShadow: [
           BoxShadow(
             color: category.gradientColors.first.withValues(alpha: 0.20),

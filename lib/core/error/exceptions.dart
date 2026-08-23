@@ -3,11 +3,7 @@ class AppException implements Exception {
   final int? statusCode;
   final dynamic data;
 
-  const AppException({
-    required this.message,
-    this.statusCode,
-    this.data,
-  });
+  const AppException({required this.message, this.statusCode, this.data});
 
   @override
   String toString() => 'AppException($statusCode): $message';
@@ -23,12 +19,12 @@ class TimeoutException extends AppException {
 
 class UnauthorizedException extends AppException {
   const UnauthorizedException({super.message = 'Unauthorized'})
-      : super(statusCode: 401);
+    : super(statusCode: 401);
 }
 
 class NotFoundException extends AppException {
   const NotFoundException({super.message = 'Resource not found'})
-      : super(statusCode: 404);
+    : super(statusCode: 404);
 }
 
 class ServerException extends AppException {
@@ -39,10 +35,8 @@ class ServerException extends AppException {
 }
 
 class BadRequestException extends AppException {
-  const BadRequestException({
-    super.message = 'Bad request',
-    super.data,
-  }) : super(statusCode: 400);
+  const BadRequestException({super.message = 'Bad request', super.data})
+    : super(statusCode: 400);
 }
 
 class CacheException extends AppException {
@@ -51,5 +45,5 @@ class CacheException extends AppException {
 
 class ConflictException extends AppException {
   const ConflictException({super.message = 'Resource already exists'})
-      : super(statusCode: 409);
+    : super(statusCode: 409);
 }

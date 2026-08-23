@@ -20,7 +20,11 @@ class SignUpRepositoryImpl implements SignUpRepository {
   }) async {
     try {
       final response = await _remoteDataSource.signUp(
-        SignUpRequestModel(fullName: fullName, email: email, password: password),
+        SignUpRequestModel(
+          fullName: fullName,
+          email: email,
+          password: password,
+        ),
       );
 
       await _secureStorage.saveTokens(
@@ -31,7 +35,10 @@ class SignUpRepositoryImpl implements SignUpRepository {
 
       return (null, response.toEntity());
     } on ConflictException {
-      return (const AuthFailure('An account with this email already exists'), null);
+      return (
+        const AuthFailure('An account with this email already exists'),
+        null,
+      );
     } on NetworkException {
       return (const NetworkFailure(), null);
     } on AppException catch (e) {

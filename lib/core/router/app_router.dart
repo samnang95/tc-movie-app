@@ -41,8 +41,10 @@ final GoRouter appRouter = GoRouter(
     final isOnSignUp = state.matchedLocation == '/sign-up';
     final isOnForgotPassword = state.matchedLocation == '/forgot-password';
 
-    if (!isLoggedIn && !isOnSignIn && !isOnSignUp && !isOnForgotPassword) return '/sign-in';
-    if (isLoggedIn && (isOnSignIn || isOnSignUp || isOnForgotPassword)) return '/home';
+    if (!isLoggedIn && !isOnSignIn && !isOnSignUp && !isOnForgotPassword)
+      return '/sign-in';
+    if (isLoggedIn && (isOnSignIn || isOnSignUp || isOnForgotPassword))
+      return '/home';
     return null;
   },
   routes: [
@@ -66,7 +68,8 @@ final GoRouter appRouter = GoRouter(
       path: '/forgot-password',
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state) => BlocProvider(
-        create: (_) => ForgotPasswordBloc(forgotPassword: getIt<ForgotPassword>()),
+        create: (_) =>
+            ForgotPasswordBloc(forgotPassword: getIt<ForgotPassword>()),
         child: const ForgotPasswordPage(),
       ),
     ),
@@ -99,7 +102,8 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: '/search',
               builder: (context, state) => BlocProvider(
-                create: (_) => SearchBloc(getRecommended: getIt<GetRecommended>()),
+                create: (_) =>
+                    SearchBloc(getRecommended: getIt<GetRecommended>()),
                 child: const SearchPage(),
               ),
             ),
@@ -129,9 +133,6 @@ final GoRouter appRouter = GoRouter(
       ],
     ),
   ],
-  errorBuilder: (context, state) => Scaffold(
-    body: Center(
-      child: Text('Page not found: ${state.uri}'),
-    ),
-  ),
+  errorBuilder: (context, state) =>
+      Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
 );

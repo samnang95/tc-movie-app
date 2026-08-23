@@ -5,10 +5,10 @@ class SecureStorage {
   final FlutterSecureStorage _storage;
 
   SecureStorage()
-      : _storage = const FlutterSecureStorage(
-          aOptions: AndroidOptions(encryptedSharedPreferences: true),
-          iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
-        );
+    : _storage = const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+      );
 
   // ── Keys ──────────────────────────────────────────────────────────────
   static const _accessTokenKey = 'access_token';
@@ -16,19 +16,23 @@ class SecureStorage {
   static const _tokenExpiresAtKey = 'token_expires_at';
 
   // ── Access Token ──────────────────────────────────────────────────────
-  Future<void> saveAccessToken(String token) => _storage.write(key: _accessTokenKey, value: token);
+  Future<void> saveAccessToken(String token) =>
+      _storage.write(key: _accessTokenKey, value: token);
   Future<String?> getAccessToken() => _storage.read(key: _accessTokenKey);
   Future<void> deleteAccessToken() => _storage.delete(key: _accessTokenKey);
 
   // ── Refresh Token ─────────────────────────────────────────────────────
-  Future<void> saveRefreshToken(String token) => _storage.write(key: _refreshTokenKey, value: token);
+  Future<void> saveRefreshToken(String token) =>
+      _storage.write(key: _refreshTokenKey, value: token);
   Future<String?> getRefreshToken() => _storage.read(key: _refreshTokenKey);
   Future<void> deleteRefreshToken() => _storage.delete(key: _refreshTokenKey);
 
   // ── Token Expiry ──────────────────────────────────────────────────────
-  Future<void> saveTokenExpiresAt(String isoDate) => _storage.write(key: _tokenExpiresAtKey, value: isoDate);
+  Future<void> saveTokenExpiresAt(String isoDate) =>
+      _storage.write(key: _tokenExpiresAtKey, value: isoDate);
   Future<String?> getTokenExpiresAt() => _storage.read(key: _tokenExpiresAtKey);
-  Future<void> deleteTokenExpiresAt() => _storage.delete(key: _tokenExpiresAtKey);
+  Future<void> deleteTokenExpiresAt() =>
+      _storage.delete(key: _tokenExpiresAtKey);
 
   /// Save both tokens and optional expiry in one call.
   Future<void> saveTokens({
