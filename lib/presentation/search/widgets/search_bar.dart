@@ -15,9 +15,7 @@ class SearchBar extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E1E),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: AppColors.white.withValues(alpha: 0.08),
-          ),
+          border: Border.all(color: AppColors.white.withValues(alpha: 0.08)),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.25),

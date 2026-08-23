@@ -9,10 +9,7 @@ class SignOutState {
     this.errorMessage = '',
   });
 
-  SignOutState copyWith({
-    SignOutStatus? status,
-    String? errorMessage,
-  }) {
+  SignOutState copyWith({SignOutStatus? status, String? errorMessage}) {
     return SignOutState(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,

@@ -78,7 +78,9 @@ class SignInPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // ── Welcome text ──
-                    Center(child: XText.heading('welcome_back'.getString(context))),
+                    Center(
+                      child: XText.heading('welcome_back'.getString(context)),
+                    ),
                     const SizedBox(height: 6),
                     Center(
                       child: XText.subtitle(

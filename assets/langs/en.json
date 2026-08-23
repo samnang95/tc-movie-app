@@ -49,5 +49,10 @@
   "category_action": "Action",
   "category_comedy": "Comedy",
   "category_horror": "Horror",
-  "category_sci_fi": "Sci-Fi"
+  "category_sci_fi": "Sci-Fi",
+  "midnight_cinema": "MIDNIGHT CINEMA",
+  "synopsis": "SYNOPSIS",
+  "cast": "CAST",
+  "see_all": "SEE ALL",
+  "related_movies": "RELATED MOVIES"
 }

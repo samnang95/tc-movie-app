@@ -21,9 +21,7 @@ class SearchTrendingChips extends StatelessWidget {
       child: Wrap(
         spacing: 10,
         runSpacing: 10,
-        children: _trendingItems
-            .map((item) => _buildChip(item))
-            .toList(),
+        children: _trendingItems.map((item) => _buildChip(item)).toList(),
       ),
     );
   }
@@ -34,9 +32,7 @@ class SearchTrendingChips extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: AppColors.white.withValues(alpha: 0.10),
-        ),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.10)),
       ),
       child: XText(
         text,

@@ -4,11 +4,12 @@ import '../../../../domain/auth/forgot_password/usecases/forgot_password.dart';
 import 'forgot_password_event.dart';
 import 'forgot_password_state.dart';
 
-class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
+class ForgotPasswordBloc
+    extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
   final ForgotPassword _forgotPassword;
 
   ForgotPasswordBloc({required this._forgotPassword})
-      : super(const ForgotPasswordState()) {
+    : super(const ForgotPasswordState()) {
     on<ForgotPasswordEmailChanged>(_onEmailChanged);
     on<ForgotPasswordSubmitted>(_onSubmitted);
   }
@@ -25,27 +26,35 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     Emitter<ForgotPasswordState> emit,
   ) async {
     if (state.email.isEmpty) {
-      emit(state.copyWith(
-        status: ForgotPasswordStatus.failure,
-        errorMessage: 'Please enter your email address',
-      ));
+      emit(
+        state.copyWith(
+          status: ForgotPasswordStatus.failure,
+          errorMessage: 'Please enter your email address',
+        ),
+      );
       return;
     }
 
-    emit(state.copyWith(status: ForgotPasswordStatus.loading, errorMessage: ''));
+    emit(
+      state.copyWith(status: ForgotPasswordStatus.loading, errorMessage: ''),
+    );
 
     final (failure, result) = await _forgotPassword(email: state.email);
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: ForgotPasswordStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: ForgotPasswordStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
-      emit(state.copyWith(
-        status: ForgotPasswordStatus.success,
-        successMessage: result?.message ?? 'Reset link sent successfully',
-      ));
+      emit(
+        state.copyWith(
+          status: ForgotPasswordStatus.success,
+          successMessage: result?.message ?? 'Reset link sent successfully',
+        ),
+      );
     }
   }
 }

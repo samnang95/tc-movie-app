@@ -23,15 +23,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final (failure, items) = await _getHomeData();
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: HomeStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: HomeStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
-      emit(state.copyWith(
-        status: HomeStatus.loaded,
-        items: items ?? [],
-      ));
+      emit(state.copyWith(status: HomeStatus.loaded, items: items ?? []));
     }
   }
 }

@@ -20,7 +20,8 @@ abstract class EnvConfig {
   static String get envFileName => '.env.${_environment.name}';
 
   // ── Getters ────────────────────────────────────────────────────────
-  static String get baseUrl => dotenv.env['BASE_URL'] ?? 'https://jsonplaceholder.typicode.com';
+  static String get baseUrl =>
+      dotenv.env['BASE_URL'] ?? 'https://jsonplaceholder.typicode.com';
   static String get appName => dotenv.env['APP_NAME'] ?? 'TC-Movie';
 
   // ── Convenience ────────────────────────────────────────────────────

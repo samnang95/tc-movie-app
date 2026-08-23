@@ -67,9 +67,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 28),
 
                   // ── New Releases ──
-                  HomeSectionHeader(
-                    title: 'new_releases'.getString(context),
-                  ),
+                  HomeSectionHeader(title: 'new_releases'.getString(context)),
                   const SizedBox(height: 14),
                   const HomeNewReleases(),
 

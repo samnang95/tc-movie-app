@@ -20,10 +20,12 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
     final (failure, _) = await _signOut();
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: SignOutStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: SignOutStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
       emit(state.copyWith(status: SignOutStatus.success));
     }

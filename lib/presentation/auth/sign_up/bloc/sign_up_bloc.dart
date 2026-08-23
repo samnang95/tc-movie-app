@@ -16,7 +16,10 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<SignUpSubmitted>(_onSubmitted);
   }
 
-  void _onFullNameChanged(SignUpFullNameChanged event, Emitter<SignUpState> emit) {
+  void _onFullNameChanged(
+    SignUpFullNameChanged event,
+    Emitter<SignUpState> emit,
+  ) {
     emit(state.copyWith(fullName: event.fullName, errorMessage: ''));
   }
 
@@ -24,11 +27,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(email: event.email, errorMessage: ''));
   }
 
-  void _onPasswordChanged(SignUpPasswordChanged event, Emitter<SignUpState> emit) {
+  void _onPasswordChanged(
+    SignUpPasswordChanged event,
+    Emitter<SignUpState> emit,
+  ) {
     emit(state.copyWith(password: event.password, errorMessage: ''));
   }
 
-  void _onTogglePassword(SignUpTogglePassword event, Emitter<SignUpState> emit) {
+  void _onTogglePassword(
+    SignUpTogglePassword event,
+    Emitter<SignUpState> emit,
+  ) {
     emit(state.copyWith(obscurePassword: !state.obscurePassword));
   }
 
@@ -36,20 +45,29 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     emit(state.copyWith(agreedToTerms: !state.agreedToTerms));
   }
 
-  Future<void> _onSubmitted(SignUpSubmitted event, Emitter<SignUpState> emit) async {
-    if (state.fullName.isEmpty || state.email.isEmpty || state.password.isEmpty) {
-      emit(state.copyWith(
-        status: SignUpStatus.failure,
-        errorMessage: 'Please fill in all fields',
-      ));
+  Future<void> _onSubmitted(
+    SignUpSubmitted event,
+    Emitter<SignUpState> emit,
+  ) async {
+    if (state.fullName.isEmpty ||
+        state.email.isEmpty ||
+        state.password.isEmpty) {
+      emit(
+        state.copyWith(
+          status: SignUpStatus.failure,
+          errorMessage: 'Please fill in all fields',
+        ),
+      );
       return;
     }
 
     if (!state.agreedToTerms) {
-      emit(state.copyWith(
-        status: SignUpStatus.failure,
-        errorMessage: 'Please agree to the Terms of Service',
-      ));
+      emit(
+        state.copyWith(
+          status: SignUpStatus.failure,
+          errorMessage: 'Please agree to the Terms of Service',
+        ),
+      );
       return;
     }
 
@@ -62,10 +80,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     );
 
     if (failure != null) {
-      emit(state.copyWith(
-        status: SignUpStatus.failure,
-        errorMessage: failure.message,
-      ));
+      emit(
+        state.copyWith(
+          status: SignUpStatus.failure,
+          errorMessage: failure.message,
+        ),
+      );
     } else {
       emit(state.copyWith(status: SignUpStatus.success));
     }

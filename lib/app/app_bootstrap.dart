@@ -19,8 +19,5 @@ Future<void> initApp(Environment env) async {
 
   final localization = FlutterLocalization.instance;
   await localization.ensureInitialized();
-  localization.init(
-    mapLocales: appLocales,
-    initLanguageCode: 'en',
-  );
+  localization.init(mapLocales: appLocales, initLanguageCode: 'en');
 }

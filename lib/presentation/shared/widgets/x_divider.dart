@@ -24,9 +24,7 @@ class XDivider extends StatelessWidget {
 
     return Row(
       children: [
-        Expanded(
-          child: Divider(color: resolvedLineColor, thickness: 1),
-        ),
+        Expanded(child: Divider(color: resolvedLineColor, thickness: 1)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Text(
@@ -40,9 +38,7 @@ class XDivider extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: Divider(color: resolvedLineColor, thickness: 1),
-        ),
+        Expanded(child: Divider(color: resolvedLineColor, thickness: 1)),
       ],
     );
   }

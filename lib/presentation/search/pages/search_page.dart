@@ -31,9 +31,7 @@ class SearchPage extends StatelessWidget {
             const SizedBox(height: 28),
 
             // ── Browse Categories ──
-            HomeSectionHeader(
-              title: 'browse_categories'.getString(context),
-            ),
+            HomeSectionHeader(title: 'browse_categories'.getString(context)),
             const SizedBox(height: 14),
             const SearchCategoryGrid(),
 
@@ -50,9 +48,7 @@ class SearchPage extends StatelessWidget {
             const SizedBox(height: 28),
 
             // ── Trending Searches ──
-            HomeSectionHeader(
-              title: 'trending_searches'.getString(context),
-            ),
+            HomeSectionHeader(title: 'trending_searches'.getString(context)),
             const SizedBox(height: 14),
             const SearchTrendingChips(),
 

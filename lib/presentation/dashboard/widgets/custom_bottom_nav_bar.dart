@@ -109,11 +109,7 @@ class CustomBottomNavBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                Icon(
-                  icon,
-                  color: color,
-                  size: 28,
-                ),
+                Icon(icon, color: color, size: 28),
               ],
             ),
             const SizedBox(height: 4),
