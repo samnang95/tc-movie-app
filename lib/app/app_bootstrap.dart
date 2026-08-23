@@ -4,6 +4,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import '../core/config/env_config.dart';
 import '../core/di/injection.dart';
 import '../core/localization/app_locale.dart';
+import '../core/services/internet_connection_service.dart';
 
 /// Shared bootstrap logic for all entry points.
 /// Initializes environment config, DI, and locales.
@@ -20,4 +21,7 @@ Future<void> initApp(Environment env) async {
   final localization = FlutterLocalization.instance;
   await localization.ensureInitialized();
   localization.init(mapLocales: appLocales, initLanguageCode: 'en');
+
+  // Initialize internet connection speed monitor
+  InternetConnectionService().init();
 }

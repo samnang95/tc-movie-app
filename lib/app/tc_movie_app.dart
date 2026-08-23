@@ -13,6 +13,7 @@ class TcMovieApp extends StatelessWidget {
     final localization = FlutterLocalization.instance;
 
     return MaterialApp.router(
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,

@@ -11,6 +11,9 @@ class ApiInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    // Record request timestamp for internet speed measurement
+    options.extra['start_time'] = DateTime.now().millisecondsSinceEpoch;
+
     // Attach auth token if available
     try {
       final secureStorage = GetIt.instance<SecureStorage>();
